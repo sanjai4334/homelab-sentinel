@@ -9,16 +9,22 @@ NTFY_TOPIC = getenv("NTFY_TOPIC")
 URL = f"{NTFY_SERVER}/{NTFY_TOPIC}"
 
 
-def notify(title: str, message: str) -> None:
+def notify(
+    title: str, message: str, priority: str | None = None, tags: list[str] | None = None
+) -> None:
+
+    headers = {"Title": title}
+
+    if priority:
+        headers["Priority"] = priority
+
+    if tags:
+        headers["Tags"] = ",".join(tags)
 
     response = requests.post(
         URL,
         data=message,
-        headers={
-            "Title": title,
-            # "Priority": "urgent",
-            # "Tags": "warning",
-        },
+        headers=headers,
         timeout=10,
     )
 
