@@ -1,0 +1,15 @@
+[Unit]
+Description=Sentinel Battery Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/homelab-sentinel
+ExecStart=%h/homelab-sentinel/.venv/bin/python %h/homelab-sentinel/main.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

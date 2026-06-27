@@ -45,8 +45,8 @@ class BatteryMonitor:
                     f"Battery has dropped to {state['percentage']:.0f}%. "
                     "Connect your charger immediately to avoid an unexpected shutdown."
                 ),
-                priority="urgent",
-                tags=["battery", "skull"],
+                priority="high",
+                tags=["battery"],
             )
 
             self.critical_notified = True
@@ -61,7 +61,7 @@ class BatteryMonitor:
                     "Consider plugging in your charger soon."
                 ),
                 priority="high",
-                tags=["battery", "warning"],
+                tags=["battery"],
             )
 
             self.low_notified = True
